@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "serialize_macro_traits"
+name = "week1-own-macro"
 version = "0.1.0"
