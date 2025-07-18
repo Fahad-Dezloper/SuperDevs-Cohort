@@ -1,0 +1,39 @@
+do deserialize
+
+https://petal-estimate-4e9.notion.site/Creating-your-own-Custom-derive-macro-Part-2-2317dfd1073580d0b6b7ea8852537040
+
+
+https://chatgpt.com/c/68768b8e-0924-800b-9755-e6869fb8bcb5
+
+
+use anchor_lang::prelude::*;
+
+declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+// fn
+pub mod my_program{
+    use super::*;
+
+    pub fn my_functions(ctx: Context<MyContext>, my_value:u64){
+        Ok(())
+    }
+}
+
+
+// space
+#[account]
+#[derive(InitSpace)]
+pub struct MyData {
+    pub my_value:u64
+}
+
+
+// struc
+pub struc MyContext<'info>{
+    $[account(mut)]
+    pub user: Signer<'info>,
+
+    #[account(init_if_needed, payer = user, space = MyData::InitSpace, seeds = #[b"MyData", user.key().as_ref()], bump)]
+
+    pub my_data: Account<'info, MyData>,
+    pub my_program: Program<'info, System>
+}
